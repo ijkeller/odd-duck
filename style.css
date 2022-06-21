@@ -2,3 +2,8 @@
     box-sizing: border-box;
     border: 2px black;
 }
+
+body {
+    height: 100vh;
+    width: 100vw;
+}
