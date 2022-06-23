@@ -1,6 +1,5 @@
 * {
     box-sizing: border-box;
-    border: 5px solid black;
     --background-color: #F3E9DC;
     --highlight-raw-sienna: #C08552;
     --highlight-caput-mortuumm: #5E3023;
@@ -31,19 +30,24 @@ h1 {
     align-self: center;
     background-color: var(--highlight-tumbleweed);
 }
-
-.displayed-images {
+/* 
+.displayed-images > img {
     border: 2px black;
-    min-width: 400px;
-    min-height: 400px;
-}
+    max-width: 400px;
+    max-height: 400px;
+} */
 
 section {
     justify-self: center;
     width: 100%;
     padding-top: 10%;
+    display: flex;
+    justify-content: space-around;
 }
 
 section > img {
     display: inline-block;
+    max-width: 250px;
+    max-height: 250px;
+    box-shadow: 3px 3px rgba(0, 0, 0, .2);
 }
