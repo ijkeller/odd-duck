@@ -1,5 +1,13 @@
 'use strict';
 
+// get image elements from the html
+let imageEls = document.querySelectorAll('img');
+let roundEl = document.getElementById('round-number');
+
+// get chart elements from the html
+let chartEl = document.getElementById('myChart');
+let ctx = chartEl.getContext('2d');
+
 // index /img contents into an array
 const imgArray = ['bag.jpg', 'banana.jpg', 'bathroom.jpg', 'boots.jpg', 'breakfast.jpg', 'chair.jpg', 'cthulhu.jpg', 'dog-duck.jpg', 'dragon.jpg', 'pen.jpg', 'pet-sweep.jpg', 'scissors.jpg', 'shark.jpg', 'sweep.png', 'tauntaun.jpg', 'unicorn.jpg', 'water-can.jpg', 'wine-glass.jpg']
 
@@ -23,9 +31,7 @@ function Image(image) {
     this.id = image;
     this.src = `./img/${image}`;
 }
-// get image elements from the html
-let imageEls = document.querySelectorAll('img');
-let roundEl = document.getElementById('round-number')
+
 
 // render images to DOM
 function renderImages() {
@@ -48,8 +54,6 @@ function renderImages() {
     while (image2.id === image3.id) {
         image2 = images[randomImage()];
     }
-
-
 
     // place the three images in the DOM and increase their views value
     imageEls[0].id = image1.id;
@@ -93,7 +97,37 @@ imageEls.forEach(function (img) {
 });
 
 
-const myChart = new ChartData(ctx, {
+function renderChart() {
+    // generate our click data, generate our view data
+    // loop through our images
+    let clicks = [];
+    let views = [];
+  
+    for (let i = 0; i < images.length; i++) {
+      clicks.push(images[i].clicks);
+      views.push(images[i].views);
+    }
+  
+    // pay attention to the properties on these objects.
+    // be vigilant, since errors will not through a big red flag
+    new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: fileNames,
+        datasets: [{
+          label: '# of Clicks',
+          data: clicks,
+          backgroundColor: 'yellow'
+        }, {
+          label: '# of Views',
+          data: views,
+          backgroundColor: 'purple'
+        }],
+      }
+    });
+  }
+
+const myChart = new Chart(ctx, {
     type: 'bar',
     data: {
         labels: imgArray,
