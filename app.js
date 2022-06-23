@@ -8,7 +8,6 @@ const images = [];
 
 let maxRounds = 25;
 let round = 0;
-let roundNumber = 0;
 
 
 // create a function to select random images
@@ -26,20 +25,20 @@ function Image(image) {
 }
 // get image elements from the html
 let imageEls = document.querySelectorAll('img');
+let roundEl = document.getElementById('round-number')
 
 // render images to DOM
 function renderImages() {
 
-    
-    roundNumber++
-    console.log(`------Round${roundNumber}------`)
+    round++
+    console.log(`------Round${round}------`)
     let image1 = images[randomImage()];
     console.log(image1.id)
     let image2 = images[randomImage()];
     console.log(image2.id)
     let image3 = images[randomImage()];
     console.log(image3.id)
-    
+
     // make sure image1 doesn't match either 2 or 3
     while (image1.id === image2.id || image1.id === image3.id) {
         image1 = images[randomImage()];
@@ -62,6 +61,8 @@ function renderImages() {
     imageEls[2].id = image3.id;
     imageEls[2].src = image3.src;
     image3.views++;
+
+    roundEl.textContent = round
 }
 
 // push all new image objects to the images array
@@ -72,37 +73,37 @@ for (let i = 0; i < imgArray.length; i++) {
 function handleClick(e) {
     e.preventDefault();
     for (let i = 0; i < images.length; i++) {
-        
+
         if (e.target.id === images[i].id) {
             images[i].votes++;
             console.log(`winner = ` + images[i].id)
+            
         }
     }
+
     renderImages();
 }
+
+// renders images to the page on page load
+window.onload = renderImages()
 
 // adds an event listener to all of the images on the page
 imageEls.forEach(function (img) {
     img.addEventListener('click', handleClick);
 });
 
-window.onload = renderImages()
 
-// while (round < maxRounds) {
-
-// }
-
-// const myChart = new ChartData(ctx, {
-//     type: 'bar',
-//     data: {
-//         labels: imgArray,
-//         datasets: [{
-//             label: '# of votes',
-//             data: [12, 19, 3, 5, 2, 3],
-//             backgroundColor: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-//         }]
-//     }
-// })
+const myChart = new ChartData(ctx, {
+    type: 'bar',
+    data: {
+        labels: imgArray,
+        datasets: [{
+            label: '# of votes',
+            data: [12, 19, 3, 5, 2, 3],
+            backgroundColor: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+        }]
+    }
+})
 
 
 
