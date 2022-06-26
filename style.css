@@ -61,3 +61,11 @@ h3 {
 ul > li {
     display: inline-block;
 }
+
+.hidden {
+    display: none;
+}
+
+canvas {
+    max-width: 80vw;
+}
